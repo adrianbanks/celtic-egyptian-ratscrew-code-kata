@@ -13,14 +13,11 @@ namespace CelticEgyptianRatscrewKata
                 Card cardBeforeLast = stack.First();
                 Card previousCard = stack.Skip(1).First();
 
-                if (cardBeforeLast.Rank == previousCard.Rank)
-                {
-                    return true;
-                }
+                if (StandardSnap(cardBeforeLast, previousCard)) return true;
 
                 foreach (var card in stack.Skip(2))
                 {
-                    if (card.Rank == previousCard.Rank || cardBeforeLast.Rank == card.Rank)
+                    if (StandardSnap(previousCard, card) || Sandwich(cardBeforeLast, card))
                     {
                         return true;
                     }
@@ -30,6 +27,16 @@ namespace CelticEgyptianRatscrewKata
             }
 
             return false;
+        }
+
+        private static bool StandardSnap(Card card1, Card card2)
+        {
+            return (card1.Rank == card2.Rank);
+        }
+
+        private static bool Sandwich(Card card1, Card card3)
+        {
+            return (card1.Rank == card3.Rank);
         }
 
         private readonly Card DarkQueen = new Card(Suit.Spades, Rank.Queen);
