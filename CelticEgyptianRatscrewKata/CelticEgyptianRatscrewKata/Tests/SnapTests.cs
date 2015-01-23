@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Collections;
+using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
 {
@@ -9,9 +10,15 @@ namespace CelticEgyptianRatscrewKata.Tests
         public void NoSnap_WhenThereIsOnlyOneCardPlayed()
         {
             var stack = new Stack(new[] {new Card(Suit.Clubs, Rank.Four)});
+            var isValid = IsValidSnap(stack);
+            Assert.IsFalse(isValid);
+        }
+
+        private static bool IsValidSnap(Stack stack)
+        {
             var validator = new StandardSnapValidator();
             bool isValid = validator.Validate(stack);
-            Assert.IsFalse(isValid);
+            return isValid;
         }
 
         [Test]
@@ -53,6 +60,24 @@ namespace CelticEgyptianRatscrewKata.Tests
                 new Card(Suit.Clubs, Rank.Seven), 
                 new Card(Suit.Clubs, Rank.Four)
             });
+            var validator = new StandardSnapValidator();
+            bool isValid = validator.Validate(stack);
+            Assert.IsTrue(isValid);
+        }
+
+        [Test]
+        public void Snap_WhenThereIsADarkQueen()
+        {
+            var stack = new Stack(new[] { new Card(Suit.Spades, Rank.Queen) });
+            var validator = new StandardSnapValidator();
+            bool isValid = validator.Validate(stack);
+            Assert.IsTrue(isValid);
+        }
+
+        [Test]
+        public void Snap_WhenThereIsADarkQueenOnTop()
+        {
+            var stack = new Stack(new[] { new Card(Suit.Diamonds, Rank.Ten), new Card(Suit.Spades, Rank.Queen) });
             var validator = new StandardSnapValidator();
             bool isValid = validator.Validate(stack);
             Assert.IsTrue(isValid);

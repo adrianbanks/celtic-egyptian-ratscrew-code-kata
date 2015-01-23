@@ -6,6 +6,8 @@ namespace CelticEgyptianRatscrewKata
     {
         public bool Validate(Stack stack)
         {
+            if (IsDarkQueenSnap(stack)) return true;
+
             if (stack.Count() > 1)
             {
                 Card cardBeforeLast = stack.First();
@@ -27,6 +29,22 @@ namespace CelticEgyptianRatscrewKata
                 }
             }
 
+            return false;
+        }
+
+        private readonly Card DarkQueen = new Card(Suit.Spades, Rank.Queen);
+
+        private bool IsDarkQueenSnap(Stack stack)
+        {
+            if (stack.Any())
+            {
+                var topCard = stack.Last();
+
+                if (topCard.Equals(DarkQueen))
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
