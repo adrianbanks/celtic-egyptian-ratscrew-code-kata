@@ -3,7 +3,7 @@
 namespace CelticEgyptianRatscrewKata.Tests
 {
     [TestFixture]
-    public class StandardSnapTests
+    public class SnapTests
     {
         [Test]
         public void NoSnap_WhenThereIsOnlyOneCardPlayed()
@@ -31,5 +31,32 @@ namespace CelticEgyptianRatscrewKata.Tests
             bool isValid = validator.Validate(stack);
             Assert.IsFalse(isValid);
         }
+
+        [Test]
+        public void Snap_WhenThereIsASandwich()
+        {
+            var stack = new Stack(new[] { new Card(Suit.Clubs, Rank.Four), new Card(Suit.Clubs, Rank.Seven), new Card(Suit.Clubs, Rank.Four) });
+            var validator = new StandardSnapValidator();
+            bool isValid = validator.Validate(stack);
+            Assert.IsTrue(isValid);
+        }
+
+        [Test]
+        public void Snap_WhenThereIsASandwichNotOnTop()
+        {
+            var stack = new Stack(new[]
+            {
+                new Card(Suit.Clubs, Rank.Ten), 
+                new Card(Suit.Clubs, Rank.Three), 
+                new Card(Suit.Clubs, Rank.Five), 
+                new Card(Suit.Clubs, Rank.Four), 
+                new Card(Suit.Clubs, Rank.Seven), 
+                new Card(Suit.Clubs, Rank.Four)
+            });
+            var validator = new StandardSnapValidator();
+            bool isValid = validator.Validate(stack);
+            Assert.IsTrue(isValid);
+        }
+
     }
 }

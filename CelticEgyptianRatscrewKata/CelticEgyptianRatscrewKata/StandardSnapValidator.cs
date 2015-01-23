@@ -8,16 +8,25 @@ namespace CelticEgyptianRatscrewKata
         {
             if (stack.Count() > 1)
             {
-                Card oldCard = stack.First();
-                foreach (var card in stack.Skip(1))
+                Card cardBeforeLast = stack.First();
+                Card previousCard = stack.Skip(1).First();
+
+                if (cardBeforeLast.Rank == previousCard.Rank)
                 {
-                    if (oldCard.Rank == card.Rank)
+                    return true;
+                }
+
+                foreach (var card in stack.Skip(2))
+                {
+                    if (card.Rank == previousCard.Rank || cardBeforeLast.Rank == card.Rank)
                     {
                         return true;
                     }
-                    oldCard = card;
+                    cardBeforeLast = previousCard;
+                    previousCard = card;
                 }
             }
+
             return false;
         }
     }
