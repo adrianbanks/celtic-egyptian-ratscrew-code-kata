@@ -48,6 +48,8 @@
     <Compile Include="Stack.cs" />
     <Compile Include="Tests\StackTests.cs" />
     <Compile Include="Suit.cs" />
+    <Compile Include="Tests\StandardSnapTests.cs" />
+    <Compile Include="StandardSnapValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
