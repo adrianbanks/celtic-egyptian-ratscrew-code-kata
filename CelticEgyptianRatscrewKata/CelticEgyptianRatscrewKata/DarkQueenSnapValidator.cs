@@ -4,10 +4,12 @@ namespace CelticEgyptianRatscrewKata
 {
     public class DarkQueenSnapValidator
     {
+        private readonly Card queenOfSpades = new Card(Suit.Spades, Rank.Queen);
+
         public bool IsSnappable(Stack stack)
         {
             var card = stack.FirstOrDefault();
-            return new Card(Suit.Spades, Rank.Queen).Equals(card);
+            return queenOfSpades.Equals(card);
         }
     }
 }
