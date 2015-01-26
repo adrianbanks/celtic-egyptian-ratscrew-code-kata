@@ -51,6 +51,7 @@
     </Compile>
     <Compile Include="DarkQueenSnapValidator.cs" />
     <Compile Include="Tests\DarkQueenValidatorTests.cs" />
+    <Compile Include="SandwichSnapValidator.cs" />
     <Compile Include="Tests\SandwichSnapValidatorTests.cs" />
     <Compile Include="Tests\StackBuilder.cs" />
     <Compile Include="Tests\StackTests.cs" />
