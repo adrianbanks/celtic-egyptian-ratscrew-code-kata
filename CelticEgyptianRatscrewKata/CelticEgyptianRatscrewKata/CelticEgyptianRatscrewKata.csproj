@@ -49,6 +49,7 @@
     <Compile Include="StandardSnapValidator.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DarkQueenSnapValidator.cs" />
     <Compile Include="Tests\DarkQueenValidatorTests.cs" />
     <Compile Include="Tests\StackTests.cs" />
     <Compile Include="Suit.cs" />
