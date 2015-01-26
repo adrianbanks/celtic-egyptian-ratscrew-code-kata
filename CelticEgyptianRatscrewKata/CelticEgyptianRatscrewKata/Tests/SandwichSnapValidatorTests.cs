@@ -14,4 +14,12 @@ namespace CelticEgyptianRatscrewKata.Tests
             Assert.That(isSnappable, Is.False);
         }
     }
+
+    public class SandwichSnapValidator
+    {
+        public bool IsSnappable(Stack stack)
+        {
+            return false;
+        }
+    }
 }
