@@ -36,6 +36,18 @@ namespace CelticEgyptianRatscrewKata.Tests
         }
 
         [Test]
+        public void AStackIsNotSnappable_WhenItContainsEnoughCardsToMakeASandwich_ButDoesNotContainOne()
+        {
+            var stack = new StackBuilder()
+                            .With(Rank.Two, Suit.Clubs)
+                            .With(Rank.Ten, Suit.Spades)
+                            .With(Rank.Five, Suit.Diamonds)
+                            .Build();
+            bool isSnappable = new SandwichSnapValidator().IsSnappable(stack);
+            Assert.That(isSnappable, Is.False);
+        }
+
+        [Test]
         public void AStackIsSnappable_WhenItContainsASandwich()
         {
             var stack = new StackBuilder()
