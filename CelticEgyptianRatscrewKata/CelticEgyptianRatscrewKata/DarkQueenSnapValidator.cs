@@ -6,7 +6,8 @@ namespace CelticEgyptianRatscrewKata
     {
         public bool IsSnappable(Stack stack)
         {
-            return stack.Count() == 1;
+            var card = stack.FirstOrDefault();
+            return new Card(Suit.Spades, Rank.Queen).Equals(card);
         }
     }
 }
