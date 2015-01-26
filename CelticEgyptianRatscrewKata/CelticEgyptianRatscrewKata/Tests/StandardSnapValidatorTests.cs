@@ -9,8 +9,7 @@ namespace CelticEgyptianRatscrewKata.Tests
         public void IsSnappable_ReturnsFalse_WhenTheStackIsEmpty()
         {
             var stack = new Stack(new Card[0]);
-            var snapValidator = new StandardSnapValidator();
-            bool isSnappable = snapValidator.IsSnappable(stack);
+            bool isSnappable = new StandardSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
 
@@ -18,8 +17,7 @@ namespace CelticEgyptianRatscrewKata.Tests
         public void IsSnappable_ReturnsFalse_WhenTheStackContainsOnlyOneCard()
         {
             var stack = new Stack(new[] {new Card(Suit.Clubs, Rank.Eight) });
-            var snapValidator = new StandardSnapValidator();
-            bool isSnappable = snapValidator.IsSnappable(stack);
+            bool isSnappable = new StandardSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
 
@@ -27,8 +25,7 @@ namespace CelticEgyptianRatscrewKata.Tests
         public void IsSnappable_ReturnsTrue_WhenThereIsAMatchingAdjacentRank()
         {
             var stack = new Stack(new[] { new Card(Suit.Clubs, Rank.Eight), new Card(Suit.Diamonds, Rank.Eight) });
-            var snapValidator = new StandardSnapValidator();
-            bool isSnappable = snapValidator.IsSnappable(stack);
+            bool isSnappable = new StandardSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.True);
         }
     }
