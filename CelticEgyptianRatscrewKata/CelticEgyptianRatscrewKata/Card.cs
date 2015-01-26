@@ -11,6 +11,11 @@
             m_Rank = rank;
         }
 
+        public bool IsSameRankAs(Card card)
+        {
+            return this.m_Rank == card.m_Rank;
+        }
+
         public override string ToString()
         {
             return string.Format("Card {0} of {1}", m_Rank, m_Suit);
@@ -37,6 +42,6 @@
                 return ((int) m_Suit*397) ^ (int) m_Rank;
             }
         }
-#endregion
+        #endregion
     }
 }
