@@ -36,5 +36,13 @@ namespace CelticEgyptianRatscrewKata.Tests
             bool isSnappable = new StandardSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
+
+        [Test]
+        public void AStackIsNotSnappable_WhenItContainsThreeCards_WithNoMatchingAdjacentRanks()
+        {
+            var stack = new Stack(new[] { new Card(Suit.Clubs, Rank.Two), new Card(Suit.Diamonds, Rank.Eight), new Card(Suit.Clubs, Rank.Two) });
+            bool isSnappable = new StandardSnapValidator().IsSnappable(stack);
+            Assert.That(isSnappable, Is.False);
+        }
     }
 }
