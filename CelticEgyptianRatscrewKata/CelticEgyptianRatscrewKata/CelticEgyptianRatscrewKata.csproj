@@ -50,17 +50,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Validators\DarkQueenSnapValidator.cs" />
-    <Compile Include="Tests\DarkQueenValidatorTests.cs" />
+    <Compile Include="Tests\Validators\DarkQueenValidatorTests.cs" />
     <Compile Include="Validators\SandwichSnapValidator.cs" />
-    <Compile Include="Tests\SandwichSnapValidatorTests.cs" />
+    <Compile Include="Tests\Validators\SandwichSnapValidatorTests.cs" />
     <Compile Include="Tests\StackBuilder.cs" />
     <Compile Include="Tests\StackTests.cs" />
     <Compile Include="Suit.cs" />
-    <Compile Include="Tests\StandardSnapValidatorTests.cs" />
+    <Compile Include="Tests\Validators\StandardSnapValidatorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

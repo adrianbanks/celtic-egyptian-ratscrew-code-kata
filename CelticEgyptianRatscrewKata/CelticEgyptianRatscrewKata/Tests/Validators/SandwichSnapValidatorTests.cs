@@ -1,7 +1,7 @@
 ﻿using CelticEgyptianRatscrewKata.Validators;
 using NUnit.Framework;
 
-namespace CelticEgyptianRatscrewKata.Tests
+namespace CelticEgyptianRatscrewKata.Tests.Validators
 {
     [TestFixture]
     public sealed class SandwichSnapValidatorTests
