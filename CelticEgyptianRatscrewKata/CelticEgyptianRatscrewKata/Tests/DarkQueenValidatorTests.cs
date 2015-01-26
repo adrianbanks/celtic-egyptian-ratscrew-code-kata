@@ -8,7 +8,8 @@ namespace CelticEgyptianRatscrewKata.Tests
         [Test]
         public void AStackIsNotSnappable_WhenItIsEmpty()
         {
-            var stack = new Stack(new Card[0]);
+            var stack = new StackBuilder()
+                            .Build();
             bool isSnappable = new DarkQueenSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
@@ -16,7 +17,9 @@ namespace CelticEgyptianRatscrewKata.Tests
         [Test]
         public void AStackIsSnappable_WhenItContainsOnlyTheQueenOfSpades()
         {
-            var stack = new Stack(new[] {new Card(Suit.Spades, Rank.Queen) });
+            var stack = new StackBuilder()
+                            .With(Rank.Queen, Suit.Spades)
+                            .Build();
             bool isSnappable = new DarkQueenSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.True);
         }
@@ -24,7 +27,9 @@ namespace CelticEgyptianRatscrewKata.Tests
         [Test]
         public void AStackIsNotSnappable_WhenItContainsOnlyTheQueenOfDiamonds()
         {
-            var stack = new Stack(new[] {new Card(Suit.Diamonds, Rank.Queen) });
+            var stack = new StackBuilder()
+                            .With(Rank.Queen, Suit.Diamonds)
+                            .Build();
             bool isSnappable = new DarkQueenSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
@@ -32,7 +37,10 @@ namespace CelticEgyptianRatscrewKata.Tests
         [Test]
         public void AStackIsNotSnappable_WhenItContainsMoreThanOneCard_AndTheTopCardIsNotTheQueenOfSpades()
         {
-            var stack = new Stack(new[] { new Card(Suit.Spades, Rank.Queen), new Card(Suit.Clubs, Rank.Eight) });
+            var stack = new StackBuilder()
+                            .With(Rank.Queen, Suit.Spades)
+                            .With(Rank.Eight, Suit.Clubs)
+                            .Build();
             bool isSnappable = new DarkQueenSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.False);
         }
@@ -40,7 +48,10 @@ namespace CelticEgyptianRatscrewKata.Tests
         [Test]
         public void AStackIsSnappable_WhenItContainsMoreThanOneCard_AndTheTopCardIsTheQueenOfSpades()
         {
-            var stack = new Stack(new[] { new Card(Suit.Clubs, Rank.Eight), new Card(Suit.Spades, Rank.Queen) });
+            var stack = new StackBuilder()
+                            .With(Rank.Eight, Suit.Clubs)
+                            .With(Rank.Queen, Suit.Spades)
+                            .Build();
             bool isSnappable = new DarkQueenSnapValidator().IsSnappable(stack);
             Assert.That(isSnappable, Is.True);
         }
