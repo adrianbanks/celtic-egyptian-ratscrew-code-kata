@@ -6,15 +6,24 @@ namespace CelticEgyptianRatscrewKata
     {
         public bool IsSnappable(Stack stack)
         {
-            if (stack.Count() != 2)
+            if (stack.Count() < 2)
             {
                 return false;
             }
 
-            var firstCard = stack.First();
-            var lastCard = stack.Last();
+            var previousCard = stack.First();
 
-            return firstCard.IsSameRankAs(lastCard);
+            foreach (var card in stack.Skip(1))
+            {
+                if (card.IsSameRankAs(previousCard))
+                {
+                    return true;
+                }
+
+                previousCard = card;
+            }
+
+            return false;
         }
     }
 }
