@@ -1,10 +1,12 @@
-﻿namespace CelticEgyptianRatscrewKata
+﻿using System.Linq;
+
+namespace CelticEgyptianRatscrewKata
 {
     public class SandwichSnapValidator
     {
         public bool IsSnappable(Stack stack)
         {
-            return false;
+            return stack.FirstOrDefault() != null;
         }
     }
 }
