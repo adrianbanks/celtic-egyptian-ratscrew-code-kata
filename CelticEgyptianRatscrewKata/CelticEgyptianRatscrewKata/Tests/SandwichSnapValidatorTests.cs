@@ -15,6 +15,16 @@ namespace CelticEgyptianRatscrewKata.Tests
         }
 
         [Test]
+        public void AStackIsNotSnappable_WhenItContainsOnlyOneCard()
+        {
+            var stack = new StackBuilder()
+                            .With(Rank.Four, Suit.Hearts)
+                            .Build();
+            bool isSnappable = new SandwichSnapValidator().IsSnappable(stack);
+            Assert.That(isSnappable, Is.False);
+        }
+
+        [Test]
         public void AStackIsSnappable_WhenItContainsASandwich()
         {
             var stack = new StackBuilder()
