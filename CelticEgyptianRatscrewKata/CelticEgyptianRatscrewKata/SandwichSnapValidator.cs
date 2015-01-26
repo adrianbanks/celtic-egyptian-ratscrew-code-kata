@@ -11,9 +11,21 @@ namespace CelticEgyptianRatscrewKata
                 return false;
             }
 
-            var firstCard = stack.First();
-            var lastCard = stack.Last();
-            return firstCard.IsSameRankAs(lastCard);
+            var nextDoorButOneNeighbourCard = stack.First();
+            var nextDoorNeighbourCard = stack.Skip(1).First();
+
+            foreach (var card in stack.Skip(2))
+            {
+                if (card.IsSameRankAs(nextDoorButOneNeighbourCard))
+                {
+                    return true;
+                }
+
+                nextDoorButOneNeighbourCard = nextDoorNeighbourCard;
+                nextDoorNeighbourCard = card;
+            }
+
+            return false;
         }
     }
 }
