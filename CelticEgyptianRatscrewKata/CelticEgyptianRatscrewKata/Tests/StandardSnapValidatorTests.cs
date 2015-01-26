@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CelticEgyptianRatscrewKata.Validators;
+using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Tests
 {

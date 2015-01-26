@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace CelticEgyptianRatscrewKata
+namespace CelticEgyptianRatscrewKata.Validators
 {
     public class DarkQueenSnapValidator
     {
