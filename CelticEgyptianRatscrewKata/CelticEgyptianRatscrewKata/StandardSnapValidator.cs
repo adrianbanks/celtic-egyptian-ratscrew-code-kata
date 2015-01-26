@@ -1,10 +1,12 @@
-﻿namespace CelticEgyptianRatscrewKata
+﻿using System.Linq;
+
+namespace CelticEgyptianRatscrewKata
 {
     public class StandardSnapValidator
     {
         public bool IsSnappable(Stack stack)
         {
-            return false;
+            return stack.Count() != 0;
         }
     }
 }
