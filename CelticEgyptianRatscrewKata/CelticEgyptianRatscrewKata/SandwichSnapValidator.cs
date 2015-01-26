@@ -6,7 +6,7 @@ namespace CelticEgyptianRatscrewKata
     {
         public bool IsSnappable(Stack stack)
         {
-            return stack.Count() >= 2;
+            return stack.Count() > 2;
         }
     }
 }
