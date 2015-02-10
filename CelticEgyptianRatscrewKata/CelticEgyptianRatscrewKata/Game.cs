@@ -14,7 +14,11 @@ namespace CelticEgyptianRatscrewKata
 
         public string Winner
         {
-            get { return m_Players.Count == 1 ? m_Players.Single().Name : null; }
+            get
+            {
+                var winner = m_Players.SingleOrDefault(p => p.Cards.Count() == 52);
+                return winner != null ? winner.Name : null;
+            }
         }
 
         public IEnumerable<Cards> PlayerHands
