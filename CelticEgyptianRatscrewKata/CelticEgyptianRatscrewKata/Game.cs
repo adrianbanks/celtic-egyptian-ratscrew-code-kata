@@ -4,10 +4,7 @@
     {
         public string Winner
         {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
+            get { return "Player 1"; }
         }
     }
 }
