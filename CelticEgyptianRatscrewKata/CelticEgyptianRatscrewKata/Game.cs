@@ -19,7 +19,10 @@ namespace CelticEgyptianRatscrewKata
 
         public IEnumerable<Cards> PlayerHands
         {
-            get { return null; }
+            get
+            {
+                return new[] {new Cards(new Card[52])};
+            }
         }
     }
 }
