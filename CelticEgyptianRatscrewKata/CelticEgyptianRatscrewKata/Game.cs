@@ -1,17 +1,20 @@
-﻿namespace CelticEgyptianRatscrewKata
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace CelticEgyptianRatscrewKata
 {
     public class Game
     {
-        private readonly int m_Players;
+        private readonly List<string> m_Players;
 
-        public Game(int players)
+        public Game(List<string> players)
         {
             m_Players = players;
         }
 
         public string Winner
         {
-            get { return m_Players == 1 ? "Player 1" : null; }
+            get { return m_Players.Count == 1 ? m_Players.Single() : null; }
         }
     }
 }
