@@ -19,5 +19,15 @@ namespace CelticEgyptianRatscrewKata.Tests
             var game = gameBuilder.Deal();
             Assert.That(game.Winner, Is.EqualTo(player));
         }
+
+        [Test]
+        public void WithTwoInitialPlayers_NobodyHasWon()
+        {
+            var gameBuilder = new GameBuilder();
+            gameBuilder.Add("Player 1");
+            gameBuilder.Add("Player 2");
+            var game = gameBuilder.Deal();
+            Assert.That(game.Winner, Is.Null);
+        }
     }
 }
