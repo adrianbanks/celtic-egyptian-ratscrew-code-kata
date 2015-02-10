@@ -16,5 +16,10 @@ namespace CelticEgyptianRatscrewKata
         {
             get { return m_Players.Count == 1 ? m_Players.Single() : null; }
         }
+
+        public IEnumerable<Cards> PlayerHands
+        {
+            get { return null; }
+        }
     }
 }

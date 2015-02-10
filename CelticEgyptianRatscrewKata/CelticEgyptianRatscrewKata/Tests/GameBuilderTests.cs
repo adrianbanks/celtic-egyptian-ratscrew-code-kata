@@ -29,5 +29,14 @@ namespace CelticEgyptianRatscrewKata.Tests
             var game = gameBuilder.Deal();
             Assert.That(game.Winner, Is.Null);
         }
+
+        [Test]
+        public void OnePlayer_HasAllTheCards()
+        {
+            var gameBuilder = new GameBuilder();
+            gameBuilder.Add("Player 1");
+            var game = gameBuilder.Deal();
+            Assert.That(game.PlayerHands.Single().Count(), Is.EqualTo(52));
+        }
     }
 }
