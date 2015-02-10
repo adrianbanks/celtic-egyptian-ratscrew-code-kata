@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
+using System.Linq;
 
 namespace CelticEgyptianRatscrewKata
 {
     public class GameBuilder
     {
-        private List<string> m_Players = new List<string>();
+        private readonly List<string> m_Players = new List<string>();
 
         public void Add(string player)
         {
@@ -14,7 +14,10 @@ namespace CelticEgyptianRatscrewKata
 
         public Game Deal()
         {
-            return new Game(m_Players);
+            var standardDeck = new CardsFactory().StandardDeck();
+            var shuffledDeck = new Shuffler().Shuffle(standardDeck);
+            var hands = new Dealer().Deal(m_Players.Count, shuffledDeck);
+            return new Game(m_Players.Zip(hands, (name, cards) => new Player(name, cards)));
         }
     }
 }

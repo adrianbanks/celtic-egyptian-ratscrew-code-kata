@@ -5,23 +5,23 @@ namespace CelticEgyptianRatscrewKata
 {
     public class Game
     {
-        private readonly List<string> m_Players;
+        private readonly List<Player> m_Players;
 
-        public Game(List<string> players)
+        public Game(IEnumerable<Player> players)
         {
-            m_Players = players;
+            m_Players = players.ToList();
         }
 
         public string Winner
         {
-            get { return m_Players.Count == 1 ? m_Players.Single() : null; }
+            get { return m_Players.Count == 1 ? m_Players.Single().Name : null; }
         }
 
         public IEnumerable<Cards> PlayerHands
         {
             get
             {
-                return new[] {new Cards(new Card[52])};
+                return m_Players.Select(p => p.Cards);
             }
         }
     }
