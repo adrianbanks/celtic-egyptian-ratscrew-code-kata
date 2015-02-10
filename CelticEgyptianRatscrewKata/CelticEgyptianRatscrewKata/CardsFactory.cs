@@ -1,10 +1,16 @@
-﻿namespace CelticEgyptianRatscrewKata
+﻿using System;
+using System.Linq;
+
+namespace CelticEgyptianRatscrewKata
 {
     public class CardsFactory
     {
         public Cards StandardDeck()
         {
-            throw new System.NotImplementedException();
+            return new Cards(
+                ((Rank[]) Enum.GetValues(typeof (Rank))).SelectMany(
+                    r => ((Suit[]) Enum.GetValues(typeof (Suit))).Select(s => new Card(s, r)))
+                    );
         }
     }
 }
