@@ -7,8 +7,10 @@ namespace ConsoleBasedGame
 {
     class UserInterface : ICurrentStatusReporter
     {
-        public IEnumerable<PlayerInfo> GetPlayerInfoFromUserLazily()
+        private PlayerMap m_PlayerMap = new PlayerMap();
+        public List<string> CapturePlayers()
         {
+            List<string> playerNames = new List<string>();
             bool again;
             do
             {
@@ -16,11 +18,12 @@ namespace ConsoleBasedGame
                 var playerName = Console.ReadLine();
                 var playCardKey = AskForKey("Enter play card key: ");
                 var snapKey = AskForKey("Enter snap key: ");
-                yield return new PlayerInfo(playerName, playCardKey, snapKey);
-
+                m_PlayerMap.AddPlayer(playerName, playCardKey, snapKey);
+                playerNames.Add(playerName);
                 var createPlayerKey = AskForKey("Create another player? (y|n): ");
                 again = createPlayerKey.Equals('y');
             } while (again);
+            return playerNames;
         }
 
         private static char AskForKey(string prompt)
@@ -48,6 +51,54 @@ namespace ConsoleBasedGame
                 Console.WriteLine("Player {0} has {1} cards left", playerCard.Key, playerCard.Value);
             }
             Console.WriteLine("Number of cards in stack {0}", numberOfCardsOnStack);
+        }
+
+        public void DisplayWinner(string winner)
+        {
+            Console.WriteLine("{0} won!", winner);
+            Console.WriteLine("Press a key to exit");
+            Console.ReadLine();
+        }
+
+        public object GetNextPlayerMove(string prompt) // Player 1 please make a move
+        {
+            char key = AskForKey(prompt);
+            var move = m_PlayerMap.ResolveMove(key);
+            return move;
+        }
+    }
+
+    class PlayerMap
+    {
+        private readonly List<PlayerInfo> m_PlayerInfos;
+
+        public PlayerMap()
+        {
+            m_PlayerInfos = new List<PlayerInfo>();
+        }
+
+        public void AddPlayer(string playerName, char playKey, char snapKey)
+        {
+            PlayerInfo info = new PlayerInfo(playerName, playKey, snapKey);
+            if (!m_PlayerInfos.Contains(info))
+            {
+                m_PlayerInfos.Add(info);
+            }
+        }
+
+        public object ResolveMove(char userInput)
+        {
+            foreach (var playerInfo in m_PlayerInfos)
+            {
+                if (playerInfo.PlayCardKey == userInput)
+                {
+                    return new PlayCardMove(playerInfo.PlayerName);
+                }
+                else if (playerInfo.SnapKey == userInput)
+                {
+                    return new SnapMove(playerInfo.PlayerName);
+                }
+            }
         }
     }
 }
