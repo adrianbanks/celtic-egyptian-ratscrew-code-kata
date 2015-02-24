@@ -57,9 +57,12 @@
     <Compile Include="Game\GameState.cs" />
     <Compile Include="Game\ICurrentStatusReporter.cs" />
     <Compile Include="Game\IGameState.cs" />
+    <Compile Include="Game\IMove.cs" />
     <Compile Include="Game\IPlayer.cs" />
     <Compile Include="Cards.cs" />
+    <Compile Include="Game\PlayCardMove.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\SnapMove.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rank.cs" />
     <Compile Include="SnapRules\DarkQueenSnapRule.cs" />

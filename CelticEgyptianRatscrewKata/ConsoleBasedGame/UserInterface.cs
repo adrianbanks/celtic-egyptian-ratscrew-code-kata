@@ -60,45 +60,11 @@ namespace ConsoleBasedGame
             Console.ReadLine();
         }
 
-        public object GetNextPlayerMove(string prompt) // Player 1 please make a move
+        public IMove GetNextPlayerMove(string prompt) // Player 1 please make a move
         {
             char key = AskForKey(prompt);
             var move = m_PlayerMap.ResolveMove(key);
             return move;
-        }
-    }
-
-    class PlayerMap
-    {
-        private readonly List<PlayerInfo> m_PlayerInfos;
-
-        public PlayerMap()
-        {
-            m_PlayerInfos = new List<PlayerInfo>();
-        }
-
-        public void AddPlayer(string playerName, char playKey, char snapKey)
-        {
-            PlayerInfo info = new PlayerInfo(playerName, playKey, snapKey);
-            if (!m_PlayerInfos.Contains(info))
-            {
-                m_PlayerInfos.Add(info);
-            }
-        }
-
-        public object ResolveMove(char userInput)
-        {
-            foreach (var playerInfo in m_PlayerInfos)
-            {
-                if (playerInfo.PlayCardKey == userInput)
-                {
-                    return new PlayCardMove(playerInfo.PlayerName);
-                }
-                else if (playerInfo.SnapKey == userInput)
-                {
-                    return new SnapMove(playerInfo.PlayerName);
-                }
-            }
         }
     }
 }
