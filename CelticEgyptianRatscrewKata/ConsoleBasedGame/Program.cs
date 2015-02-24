@@ -9,9 +9,9 @@ namespace ConsoleBasedGame
     {
         static void Main(string[] args)
         {
-            GameController game = new GameFactory().Create(new ConsoleStatusReporter());
-
             var userInterface = new UserInterface();
+            GameController game = new GameFactory().Create(userInterface);
+
             IEnumerable<PlayerInfo> playerInfos = userInterface.GetPlayerInfoFromUserLazily().ToList();
 
             var playerMap = new Dictionary<string, Player>();
