@@ -11,19 +11,22 @@ namespace CelticEgyptianRatscrewKata.Game
     public class GameState : IGameState
     {
         private readonly Cards m_Stack;
+        private readonly ICurrentStatusReporter m_StatusReporter;
         private readonly IDictionary<string, Cards> m_Decks;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public GameState()
-            : this(Cards.Empty(), new Dictionary<string, Cards>()) {}
+        /// <param name="stateReporter"></param>
+        public GameState(ICurrentStatusReporter stateReporter)
+            : this(Cards.Empty(), new Dictionary<string, Cards>(), stateReporter) {}
 
         /// <summary>
         /// Constructor to allow setting the central stack.
         /// </summary>
-        public GameState(Cards stack, IDictionary<string, Cards> decks)
+        public GameState(Cards stack, IDictionary<string, Cards> decks, ICurrentStatusReporter stateReporter)
         {
+            m_StatusReporter = stateReporter;
             m_Stack = stack;
             m_Decks = decks;
         }
@@ -36,13 +39,19 @@ namespace CelticEgyptianRatscrewKata.Game
             m_Decks.Add(playerId, deck);
         }
 
-        public void PlayCard(string playerId)
+        public Card PlayCard(string playerId)
         {
             if (!m_Decks.ContainsKey(playerId)) throw new ArgumentException("The selected player doesn't exist");
             if (!m_Decks[playerId].Any()) throw new ArgumentException("The selected player doesn't have any cards left");
 
             var topCard = m_Decks[playerId].Pop();
             m_Stack.AddToTop(topCard);
+
+
+            var playerCardCounts = m_Decks.Select(p => new Tuple<string, int>(p.Key, p.Value.Count())).ToDictionary(p => p.Item1, p => p.Item2);
+            m_StatusReporter.UpdateCurrentStatus(topCard, null, playerCardCounts, m_Stack.Count());
+
+            return topCard;
         }
 
         public void WinStack(string playerId)
