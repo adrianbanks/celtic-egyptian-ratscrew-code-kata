@@ -2,12 +2,6 @@
 
 namespace CelticEgyptianRatscrewKata.Game
 {
-    public interface ITurnController
-    {
-        Card PlayCard(IPlayer player);
-        bool AttemptSnap(IPlayer player);
-    }
-
     public class TurnController : ITurnController
     {
         private readonly IGameState _gameState;
@@ -35,8 +29,6 @@ namespace CelticEgyptianRatscrewKata.Game
                 _gameState.WinStack(player.Name);
                 return true;
             }
-
-            // apply penalty
 
             return false;
         }
