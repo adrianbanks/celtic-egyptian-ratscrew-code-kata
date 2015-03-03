@@ -27,12 +27,14 @@ namespace CelticEgyptianRatscrewKata.Game
 
             var snapSuccessful = _turnController.AttemptSnap(player);
 
-            if (!snapSuccessful)
+            if (snapSuccessful)
             {
-                penalisedPlayers.Add(player.Name);
+                penalisedPlayers.Clear();
+                return true;
             }
 
-            return snapSuccessful;
+            penalisedPlayers.Add(player.Name);
+            return false;
         }
 
         public void ResolveADeadlock(int totalPlayerCount)

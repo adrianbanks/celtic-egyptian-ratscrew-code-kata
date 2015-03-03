@@ -138,6 +138,35 @@ namespace CelticEgyptianRatscrewKata.Tests
 
         }
 
+        [Test]
+        public void WhenAPlayersSuccessfullySnaps_AllPenaltiesAreRemoved()
+        {
+            //Arrange
+            var gameController = CreateGameController();
+            var playerA = new Player("playerA");
+            var playerB = new Player("playerB");
+            var deck = CreateDeckWithTwoPairsOfPairedCards();
+
+            //Act
+            gameController.AddPlayer(playerA);
+            gameController.AddPlayer(playerB);
+            gameController.StartGame(deck);
+
+            gameController.PlayCard(playerA);
+            gameController.AttemptSnap(playerA);  //Invalid snap..
+
+            gameController.PlayCard(playerB);
+            gameController.AttemptSnap(playerB);  //Valid snap.. Clears penalties
+
+            gameController.PlayCard(playerA);
+            gameController.PlayCard(playerB);
+
+            bool successfulSnap = gameController.AttemptSnap(playerA);
+
+            //Assert
+            Assert.True(successfulSnap);
+        }
+
         private static GameController CreateGameController()
         {
             var gameState = new GameState();
@@ -182,6 +211,17 @@ namespace CelticEgyptianRatscrewKata.Tests
                 (
                     new Card(Suit.Clubs, Rank.Three),
                     new Card(Suit.Spades, Rank.Three)
+                );
+        }
+
+        public static Cards CreateDeckWithTwoPairsOfPairedCards()
+        {
+            return Cards.With
+                (
+                    new Card(Suit.Clubs, Rank.Three),
+                    new Card(Suit.Spades, Rank.Three),
+                    new Card(Suit.Clubs, Rank.Five),
+                    new Card(Suit.Spades, Rank.Five)
                 );
         }
 
