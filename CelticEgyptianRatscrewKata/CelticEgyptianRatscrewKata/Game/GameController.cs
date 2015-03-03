@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using CelticEgyptianRatscrewKata.GameSetup;
-using CelticEgyptianRatscrewKata.SnapRules;
 
 namespace CelticEgyptianRatscrewKata.Game
 {
@@ -10,19 +9,19 @@ namespace CelticEgyptianRatscrewKata.Game
     /// </summary>
     public class GameController : IGameController
     {
-        private readonly ISnapValidator _snapValidator;
         private readonly IDealer _dealer;
         private readonly IShuffler _shuffler;
         private readonly IList<IPlayer> _players;
         private readonly IGameState _gameState;
+        private readonly ITurnController _turnController;
 
-        public GameController(IGameState gameState, ISnapValidator snapValidator, IDealer dealer, IShuffler shuffler)
+        public GameController(IGameState gameState, ITurnController turnController, IDealer dealer, IShuffler shuffler)
         {
             _players = new List<IPlayer>();
             _gameState = gameState;
-            _snapValidator = snapValidator;
             _dealer = dealer;
             _shuffler = shuffler;
+            _turnController = turnController;
         }
 
         public IEnumerable<IPlayer> Players
@@ -56,23 +55,13 @@ namespace CelticEgyptianRatscrewKata.Game
 
         public Card PlayCard(IPlayer player)
         {
-            if (_gameState.HasCards(player.Name))
-            {
-                return _gameState.PlayCard(player.Name);
-            }
-            return null;
+            return _turnController.PlayCard(player);
         }
 
         public bool AttemptSnap(IPlayer player)
         {
             AddPlayer(player);
-
-            if (_snapValidator.CanSnap(_gameState.Stack))
-            {
-                _gameState.WinStack(player.Name);
-                return true;
-            }
-            return false;
+            return _turnController.AttemptSnap(player);
         }
 
         /// <summary>
