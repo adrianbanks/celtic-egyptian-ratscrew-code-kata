@@ -114,8 +114,9 @@ namespace CelticEgyptianRatscrewKata.Tests
             var completeSnapValidator = CreateCompleteSnapValidator();
             var dealer = new Dealer();
             var noneShufflingShuffler = new NoneShufflingShuffler();
-
-            return new GameController(gameState, new TurnController(completeSnapValidator, gameState), dealer, noneShufflingShuffler);
+            var turnController = new TurnController(completeSnapValidator, gameState);
+            var penalisingTurnController = new PenalisingTurnController(turnController);
+            return new GameController(gameState, penalisingTurnController, dealer, noneShufflingShuffler);
         }
 
         private static ISnapValidator CreateCompleteSnapValidator()
