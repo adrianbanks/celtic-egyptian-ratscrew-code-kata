@@ -61,7 +61,9 @@ namespace CelticEgyptianRatscrewKata.Game
         public bool AttemptSnap(IPlayer player)
         {
             AddPlayer(player);
-            return _turnController.AttemptSnap(player);
+            var attemptSnap = _turnController.AttemptSnap(player);
+            _turnController.ResolveADeadlock(_players.Count);
+            return attemptSnap;
         }
 
         /// <summary>

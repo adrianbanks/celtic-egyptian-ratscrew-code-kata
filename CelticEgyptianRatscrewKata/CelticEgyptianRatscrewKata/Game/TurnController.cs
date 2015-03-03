@@ -32,5 +32,9 @@ namespace CelticEgyptianRatscrewKata.Game
 
             return false;
         }
+
+        public void ResolveADeadlock(int totalPlayerCount)
+        {
+        }
     }
 }

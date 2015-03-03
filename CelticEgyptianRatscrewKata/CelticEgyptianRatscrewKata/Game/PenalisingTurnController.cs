@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using NUnit.Framework;
 
 namespace CelticEgyptianRatscrewKata.Game
 {
     public class PenalisingTurnController : ITurnController
     {
         private readonly ITurnController _turnController;
-        private List<string> penalisedPlayers;
+        private readonly List<string> penalisedPlayers;
 
         public PenalisingTurnController(ITurnController turnController)
         {
@@ -25,7 +24,7 @@ namespace CelticEgyptianRatscrewKata.Game
             {
                 return false;
             }
-            
+
             var snapSuccessful = _turnController.AttemptSnap(player);
 
             if (!snapSuccessful)
@@ -34,6 +33,14 @@ namespace CelticEgyptianRatscrewKata.Game
             }
 
             return snapSuccessful;
+        }
+
+        public void ResolveADeadlock(int totalPlayerCount)
+        {
+            if (totalPlayerCount == penalisedPlayers.Count)
+            {
+                penalisedPlayers.Clear();
+            }
         }
     }
 }
