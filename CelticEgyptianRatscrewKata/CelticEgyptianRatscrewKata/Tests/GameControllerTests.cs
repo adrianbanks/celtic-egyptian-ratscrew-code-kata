@@ -80,6 +80,34 @@ namespace CelticEgyptianRatscrewKata.Tests
             Assert.False(hasWinner);
         }
 
+        [Test]
+        public void WhenAnInvalidSnapIsAttemptedCanNotSnapAgain()
+        {
+            //Arrange
+            var gameController = CreateGameController();
+            var playerA = new Player("playerA");
+            var playerB = new Player("playerB");
+            var deck = CreateDeckWithTwoPairedCards();
+
+            //Act
+            gameController.AddPlayer(playerA);
+            gameController.AddPlayer(playerB);
+            gameController.StartGame(deck);
+
+            gameController.PlayCard(playerA); 
+            gameController.AttemptSnap(playerA);  //Invalid snap..
+
+            gameController.PlayCard(playerB);
+            gameController.AttemptSnap(playerA);  //Cards paired, but player penalised
+
+            //Assert
+            //snap was not allowed, so no potential winner
+            IPlayer potentialWinner;
+            var hasWinner = gameController.TryGetWinner(out potentialWinner);
+            Assert.False(hasWinner);
+
+        }
+
         private static GameController CreateGameController()
         {
             var gameState = new GameState();
@@ -87,7 +115,7 @@ namespace CelticEgyptianRatscrewKata.Tests
             var dealer = new Dealer();
             var noneShufflingShuffler = new NoneShufflingShuffler();
 
-            return new GameController(gameState, completeSnapValidator, dealer, noneShufflingShuffler);
+            return new GameController(gameState, new TurnController(completeSnapValidator, gameState), dealer, noneShufflingShuffler);
         }
 
         private static ISnapValidator CreateCompleteSnapValidator()
@@ -116,6 +144,16 @@ namespace CelticEgyptianRatscrewKata.Tests
                 new Card(Suit.Clubs, Rank.Nine)
                 );
         }
+
+        public static Cards CreateDeckWithTwoPairedCards()
+        {
+            return Cards.With
+                (
+                    new Card(Suit.Clubs, Rank.Three),
+                    new Card(Suit.Spades, Rank.Three)
+                );
+        }
+
     }
 
     public class NoneShufflingShuffler : IShuffler
