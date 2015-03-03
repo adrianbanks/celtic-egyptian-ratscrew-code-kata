@@ -108,6 +108,36 @@ namespace CelticEgyptianRatscrewKata.Tests
 
         }
 
+        [Test]
+        public void WhenAllPlayersHaveAPenalty_ThePenaltiesAreRemoved()
+        {
+            //Arrange
+            var gameController = CreateGameController();
+            var playerA = new Player("playerA");
+            var playerB = new Player("playerB");
+            var deck = CreateDeckWithTwoPairedCards();
+
+            //Act
+            gameController.AddPlayer(playerA);
+            gameController.AddPlayer(playerB);
+            gameController.StartGame(deck);
+
+            gameController.PlayCard(playerA);
+            gameController.AttemptSnap(playerA);  //Invalid snap..
+            gameController.AttemptSnap(playerB);  //Invalid snap..
+
+            gameController.PlayCard(playerB);
+
+            gameController.AttemptSnap(playerA);
+
+            //Assert
+            //all players had a penalty => no penalties overall, so A can win
+            IPlayer potentialWinner;
+            var hasWinner = gameController.TryGetWinner(out potentialWinner);
+            Assert.True(hasWinner);
+
+        }
+
         private static GameController CreateGameController()
         {
             var gameState = new GameState();
