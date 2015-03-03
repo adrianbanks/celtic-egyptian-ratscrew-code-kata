@@ -16,9 +16,8 @@ namespace CelticEgyptianRatscrewKata.Game
 
             var gameState = new GameState();
             var snapValidator = new SnapValidator(rules);
-            var turnController = new TurnController(snapValidator, gameState);
-            var penalisingTurnController = new PenalisingTurnController(turnController);
-            var gameController = new GameController(gameState, penalisingTurnController, new Dealer(), new Shuffler());
+            var turnController = new TurnController(snapValidator, gameState, new Penaliser());
+            var gameController = new GameController(gameState, turnController, new Dealer(), new Shuffler());
             return new LoggedGameController(gameController, log);
         }
     }
