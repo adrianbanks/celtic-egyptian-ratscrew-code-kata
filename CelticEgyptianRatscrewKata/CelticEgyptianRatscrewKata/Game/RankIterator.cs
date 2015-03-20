@@ -9,9 +9,13 @@
             currentRank = startingRank;
         }
 
-        public Rank GetNext()
+        public Rank Current
         {
-            var thisRank = currentRank;
+            get { return currentRank; }
+        }
+
+        public void MoveNext()
+        {
             var next = currentRank + 1;
 
             if (next > Rank.King)
@@ -20,7 +24,6 @@
             }
 
             currentRank = next;
-            return thisRank;
         }
     }
 }

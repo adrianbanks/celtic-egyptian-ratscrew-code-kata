@@ -12,7 +12,6 @@ namespace CelticEgyptianRatscrewKata.Game
         private readonly Cards _stack;
         private readonly IDictionary<string, Cards> _decks;
         private readonly RankIterator _rankIterator;
-        private Rank _currentCalledOutRank = Rank.Ace;
 
         /// <summary>
         /// Default constructor.
@@ -51,7 +50,7 @@ namespace CelticEgyptianRatscrewKata.Game
             if (!_decks[playerId].Any()) throw new ArgumentException("The selected player doesn't have any cards left");
 
             var topCard = _decks[playerId].Pop();
-            _currentCalledOutRank = _rankIterator.GetNext();
+            _rankIterator.MoveNext();
             _stack.AddToTop(topCard);
             return topCard;
         }
@@ -99,7 +98,7 @@ namespace CelticEgyptianRatscrewKata.Game
 
         public Rank CurrentCalledOutRank
         {
-            get { return _currentCalledOutRank; }
+            get { return _rankIterator.Current; }
         }
     }
 }

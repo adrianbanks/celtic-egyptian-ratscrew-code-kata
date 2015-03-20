@@ -7,23 +7,26 @@ namespace CelticEgyptianRatscrewKata.Tests
     public sealed class RankIteratorTests
     {
         [Test]
+        public void IteratorStartsAtSpecifiedRank()
+        {
+            var iterator = new RankIterator(startingRank: Rank.Ace);
+            Assert.That(iterator.Current, Is.EqualTo(Rank.Ace));
+        }
+
+        [Test]
         public void TestIteratorStartsAtAceAndIncrements()
         {
-            var iterator = new RankIterator();
-            var first = iterator.GetNext();
-            Assert.That(first, Is.EqualTo(Rank.Ace));
-            var second = iterator.GetNext();
-            Assert.That(second, Is.EqualTo(Rank.Two));
+            var iterator = new RankIterator(startingRank: Rank.Ace);
+            iterator.MoveNext();
+            Assert.That(iterator.Current, Is.EqualTo(Rank.Two));
         }
 
         [Test]
         public void TestIteratorCyclesRoundCorrectly()
         {
-            var iterator = new RankIterator(Rank.King);
-            var first = iterator.GetNext();
-            Assert.That(first, Is.EqualTo(Rank.King));
-            var second = iterator.GetNext();
-            Assert.That(second, Is.EqualTo(Rank.Ace));
+            var iterator = new RankIterator(startingRank: Rank.King);
+            iterator.MoveNext();
+            Assert.That(iterator.Current, Is.EqualTo(Rank.Ace));
         }
     }
 }
