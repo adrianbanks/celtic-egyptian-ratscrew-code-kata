@@ -81,6 +81,7 @@
     <Compile Include="Tests\EndToEndPenaltyTests.cs" />
     <Compile Include="Tests\PlayerSequenceTests.cs" />
     <Compile Include="Tests\RankIteratorTests.cs" />
+    <Compile Include="Tests\SnapRules\CallOutSnapRuleTests.cs" />
     <Compile Include="Tests\SnapRules\DarkQueenRuleTests.cs" />
     <Compile Include="Tests\SnapRules\SandwichSnapRuleTests.cs" />
     <Compile Include="Tests\SnapRules\StandardSnapRuleTests.cs" />
