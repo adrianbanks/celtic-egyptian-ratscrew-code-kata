@@ -54,6 +54,7 @@
     <Compile Include="Game\LoggedPenalties.cs" />
     <Compile Include="Game\Penalties.cs" />
     <Compile Include="Game\PlayerSequence.cs" />
+    <Compile Include="Game\RankIterator.cs" />
     <Compile Include="ILog.cs" />
     <Compile Include="SnapRules\DarkQueenSnapRule.cs" />
     <Compile Include="GameSetup\Dealer.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="SnapRules\StandardSnapRule.cs" />
     <Compile Include="Tests\EndToEndPenaltyTests.cs" />
     <Compile Include="Tests\PlayerSequenceTests.cs" />
+    <Compile Include="Tests\RankIteratorTests.cs" />
     <Compile Include="Tests\SnapRules\DarkQueenRuleTests.cs" />
     <Compile Include="Tests\SnapRules\SandwichSnapRuleTests.cs" />
     <Compile Include="Tests\SnapRules\StandardSnapRuleTests.cs" />
