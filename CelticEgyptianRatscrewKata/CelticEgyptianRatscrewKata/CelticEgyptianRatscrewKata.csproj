@@ -56,6 +56,7 @@
     <Compile Include="Game\PlayerSequence.cs" />
     <Compile Include="Game\RankIterator.cs" />
     <Compile Include="ILog.cs" />
+    <Compile Include="SnapRules\CallOutSnapRule.cs" />
     <Compile Include="SnapRules\DarkQueenSnapRule.cs" />
     <Compile Include="GameSetup\Dealer.cs" />
     <Compile Include="GameSetup\IDealer.cs" />

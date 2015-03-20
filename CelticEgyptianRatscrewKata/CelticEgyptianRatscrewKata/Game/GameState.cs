@@ -51,6 +51,7 @@ namespace CelticEgyptianRatscrewKata.Game
             if (!_decks[playerId].Any()) throw new ArgumentException("The selected player doesn't have any cards left");
 
             var topCard = _decks[playerId].Pop();
+            _currentCalledOutRank = _rankIterator.GetNext();
             _stack.AddToTop(topCard);
             return topCard;
         }
@@ -94,11 +95,6 @@ namespace CelticEgyptianRatscrewKata.Game
         {
             ClearStack();
             _decks.Clear();
-        }
-
-        public void CallOutRank()
-        {
-            _currentCalledOutRank = _rankIterator.GetNext();
         }
 
         public Rank CurrentCalledOutRank
