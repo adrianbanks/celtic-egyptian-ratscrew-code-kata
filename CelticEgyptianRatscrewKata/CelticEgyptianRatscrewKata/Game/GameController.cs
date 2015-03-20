@@ -50,6 +50,11 @@ namespace CelticEgyptianRatscrewKata.Game
             return _gameState.NumberOfCards(player.Name);
         }
 
+        public Rank CurrentCallOut
+        {
+            get { return _gameState.CurrentCalledOutRank; }
+        }
+
         /// <summary>
         /// Starts a game with the currently added players
         /// </summary>

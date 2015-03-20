@@ -21,6 +21,7 @@ namespace CelticEgyptianRatscrewKata.Game
         public Card PlayCard(IPlayer player)
         {
             var playedCard = _gameController.PlayCard(player);
+            _log.Log(string.Format("Current call out: {0}", CurrentCallOut));
             _log.Log(string.Format("{0} has played the {1}", player.Name, playedCard));
             LogGameState();
             return playedCard;
@@ -70,6 +71,11 @@ namespace CelticEgyptianRatscrewKata.Game
         public int NumberOfCards(IPlayer player)
         {
             return _gameController.NumberOfCards(player);
+        }
+
+        public Rank CurrentCallOut
+        {
+            get { return _gameController.CurrentCallOut; }
         }
 
         private void LogGameState()
