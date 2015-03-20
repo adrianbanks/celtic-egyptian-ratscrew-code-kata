@@ -5,9 +5,9 @@ namespace CelticEgyptianRatscrewKata.SnapRules
 {
     public class CallOutSnapRule : ISnapRule
     {
-        private readonly GameState _gameState;
+        private readonly IGameState _gameState;
 
-        public CallOutSnapRule(GameState gameState)
+        public CallOutSnapRule(IGameState gameState)
         {
             _gameState = gameState;
         }
