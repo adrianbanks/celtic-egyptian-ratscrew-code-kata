@@ -36,5 +36,9 @@ namespace CelticEgyptianRatscrewKata.Game
         void Clear();
 
         int NumberOfCards(string name);
+        
+        void CallOutRank();
+
+        Rank CurrentCalledOutRank { get; }
     }
 }

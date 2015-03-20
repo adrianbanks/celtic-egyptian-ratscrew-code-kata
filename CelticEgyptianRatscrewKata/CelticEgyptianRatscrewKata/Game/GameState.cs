@@ -11,20 +11,23 @@ namespace CelticEgyptianRatscrewKata.Game
     {
         private readonly Cards _stack;
         private readonly IDictionary<string, Cards> _decks;
+        private readonly RankIterator _rankIterator;
+        private Rank _currentCalledOutRank = Rank.Ace;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public GameState()
-            : this(Cards.Empty(), new Dictionary<string, Cards>()) {}
+            : this(Cards.Empty(), new Dictionary<string, Cards>(), new RankIterator()) { }
 
         /// <summary>
         /// Constructor to allow setting the central stack.
         /// </summary>
-        public GameState(Cards stack, IDictionary<string, Cards> decks)
+        public GameState(Cards stack, IDictionary<string, Cards> decks, RankIterator rankRankIterator)
         {
             _stack = stack;
             _decks = decks;
+            _rankIterator = rankRankIterator;
         }
 
         public Cards Stack { get {return new Cards(_stack);} }
@@ -91,6 +94,16 @@ namespace CelticEgyptianRatscrewKata.Game
         {
             ClearStack();
             _decks.Clear();
+        }
+
+        public void CallOutRank()
+        {
+            _currentCalledOutRank = _rankIterator.GetNext();
+        }
+
+        public Rank CurrentCalledOutRank
+        {
+            get { return _currentCalledOutRank; }
         }
     }
 }
