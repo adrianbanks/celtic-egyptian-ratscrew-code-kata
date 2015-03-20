@@ -31,6 +31,21 @@ namespace CelticEgyptianRatscrewKata.Tests.SnapRules
         }
 
         [Test]
+        public void SnapIsInvalid_WhenTheTopCardDoesNotMatchTheCallOut_ButALowerDownCardDoes()
+        {
+            var gameState = Substitute.For<IGameState>();
+            gameState.CurrentCalledOutRank.Returns(Rank.Ten);
+            var snapRule = new CallOutSnapRule(gameState);
+            var cards = new Cards(new[]
+            {
+                new Card(Suit.Clubs, Rank.Four),
+                new Card(Suit.Clubs, Rank.Ten),
+            });
+            
+            Assert.That(snapRule.IsSnapValid(cards), Is.False);
+        }
+
+        [Test]
         public void SnapIsValid_WhenTheTopCardMatchesTheCallOut()
         {
             var gameState = Substitute.For<IGameState>();
